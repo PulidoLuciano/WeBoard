@@ -47,3 +47,8 @@
     6.2. Custom background
     6.3. Custom cards back 
 
+7. There must be an elo ranking
+    7.1. Each multiplayer game will have his elo ranking, players will be matched about their elos
+    7.2. The elo formula for 1v1 must be: (WinnerElo - LoserElo) * 0.1 + 30
+    7.3. The elo formula for all vs all games must be:
+        7.3.1. For the winner: ((Loser1Elo + Loser2Elo + ... + LoserNElo) / N - WinnerElo) * 0.1 + 30 
