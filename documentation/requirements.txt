@@ -1,0 +1,49 @@
+**Functional Requirements**
+1. Initial page in which the user can choose a game
+    1.1. There must be singleplayer games
+        1.1.1. Minesweeper
+        1.1.2. Snake
+        1.1.3. Photo Tagging (to reconsider)
+        1.1.4. Memory (to reconsider)
+    1.2. There must be 1v1 games
+        1.2.1. Truco (to reconsider)
+        1.2.2. Memory (to reconsider)
+        1.2.3. Battleship
+        1.2.4. Poker Dice
+        1.2.5. Card game gwent style (to reconsider)
+        1.2.6. Chess (to reconsider)
+        1.2.7. Checkers (to reconsider)
+        1.2.8. Guess who
+    1.3. There must be All vs. All games
+        1.3.1. Poker
+        1.3.2. Ludo
+        1.3.3. Truco??
+        1.3.4. Scattergories (Tutti Frutti)
+
+2. Users will have to provide a username before playing any game
+    2.1. Username might be protected with a password by creating an account
+        2.1.1. To create an account must be necessary an e-mail and a password
+    
+3. Games will have a ranking
+    3.1. On singleplayer games, it may be only the best 10 times 
+    3.2. On multiplayer games each username will have an elo
+
+4. Multiplayer games will have public and private rooms
+    4.1. Every room must have an id
+    4.2. Rooms must have different matchmaking methods
+        4.2.1. Public rooms will match players about their elo
+        4.2.2. Players must enter a private room with its id or link
+    4.3. Private rooms might be protected with a password
+
+5. There are be also some utilities for board games
+    5.1. Utilities doesn't need a username to be used
+    5.2. Some utilities must be
+        5.2.1. Dices (6, 20, and so on)
+        5.2.2. Random Number
+        5.2.3. Letters poll (like Scattergories)
+
+6. Maybe can be interesting to add some styling
+    6.1. Personalize avatars
+    6.2. Custom background
+    6.3. Custom cards back 
+
