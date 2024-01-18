@@ -1,0 +1,17 @@
+UC1: Pick Name
+Actor: User
+Preconditions: None
+Normal Flow:
+    1- User wants to set his username for the session
+    2- System shows the formulary
+    3- User enter the username he wants to use
+    4- System associate username with the user
+Alternative flows:
+    1a- User had chosen an username before
+        1- User wants to change the username
+        2- System shows the formulary and disassociate the username from the user 
+    3a- Username is protected with a password
+        1- System shows a new formulary
+        2- User enter the password
+            2a- Password is not correct
+                1- System announce the error and request the password again

@@ -1,0 +1,21 @@
+UC2: Protect Name
+Actor: User
+Preconditions: User has already chosen name 
+Normal Flow:
+    1- User wants to protect his username
+    2- System shows a formulary asking for a password and e-mail
+    3- User enter his email, password and confirm password
+    4- System sends an e-mail with a code to verify the address and shows a formulary
+    5- User enters the code to verify his email address
+    6- System saves the data and protect the username
+Alternative flows:
+    3a- E-mail doesn't match the pattern
+        1- System announce the error and request the password data again
+    3b- Password doesn't  meet the requirements
+        1- System announce the error and request the password data again
+    3c- Password and confirm password doesn't match
+        1- System announce the error and request the password data again
+    5a- User doesn't enter the code
+        1- System delete the data and doesn't protect the username
+    5b- User enter a wrong code
+        1- System sends a new code to verify the account
