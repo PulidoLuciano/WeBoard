@@ -1,0 +1,14 @@
+UC3: PlayGame
+Actor: User
+Preconditions: User has already chosen name 
+Normal Flow:
+    1- User wants to play a game
+    2- System shows all the available game modes
+    3- User selects a game mode
+    4- System shows all the games available for this mode
+    5- User selects a game
+    6- System request whether he wants a private or a public room
+Alternative flows:
+    1a- User has not chosen a name
+        1- System request for a name
+    

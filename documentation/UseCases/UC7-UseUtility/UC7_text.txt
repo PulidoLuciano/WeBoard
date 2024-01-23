@@ -1,0 +1,9 @@
+UC3: UseUtility
+Actor: User
+Preconditions: None
+Normal Flow:
+    1- User wants to use an utility
+    2- System shows all the available utilities
+    3- User selects a utility
+    4- System shows the utility interface
+Alternative flows:

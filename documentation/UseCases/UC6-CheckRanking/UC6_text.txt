@@ -1,0 +1,13 @@
+UC6: CheckRankings
+Actor: User
+Preconditions: None
+Normal Flow:
+    1- User wants to check a game's ranking
+    2- System shows all the available game modes
+    3- User selects a game mode
+    4- System shows all the games available for this mode
+    5- User selects a game
+    6- System shows the top 100 players or times
+Alternative flows:
+    6a- The user has chosen a name
+        1- System shows user's elo and his position on top

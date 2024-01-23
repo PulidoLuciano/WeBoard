@@ -1,0 +1,19 @@
+UC5: PrivateGame
+Actor: User
+Preconditions: User has already chosen a game
+Normal Flow:
+    1- User wants to play a game in a private room
+    2- System question whether he wants to create or join a room
+Alternative flows:
+    2a- User wants to create a new room
+        1- User selects the option
+        2- System creates the new room and ask for a password
+        3- User writes the password
+        4- System creates the lobby for the room and provide the user with an id and a link
+    2b- User wants to join an existing room 
+        1- User selects the option
+        2- System asks for the room's id and the password
+        3- User enter the data
+        4- System check the password and let the user join the room  if it's correct
+            4a- The password or id are not correct
+                1- System asks for the data again

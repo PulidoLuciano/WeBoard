@@ -1,0 +1,10 @@
+UC4: PublicGame
+Actor: User
+Preconditions: User has already chosen a game
+Normal Flow:
+    1- User wants to play a game in a public room
+    2- System looks for other user with similar elo looking for a match
+    3- Users join the lobby 
+    4- System initialize the game after 10 seconds all users are connected
+Alternative flows:
+    
