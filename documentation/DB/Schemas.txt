@@ -1,0 +1,29 @@
+-------USER--------
+Username: STRING(30) Not null unique
+E-mail: STRING(50) Nullable unique
+Password: STRING(30) Hashing Nullable
+
+-------SESSION--------
+StartTime: Timestamp
+User: UserId
+
+-------GAME--------
+Name: STRING(30)
+Image: URL
+Instructions: ARRAY STRING
+Mode: STRING(15) ENUM?
+
+-------ROOM--------
+Type: STRING(15) ENUM?
+Password: STRING(30) Hashing Nullable
+InitialTime: timestamp
+Users: ARRAY Users with score and hasLoosed
+GameData: object/JSON
+
+-------RANKING--------
+User: UserId
+Game: GameId
+Elo: integer (for singleplayer with time save the ms)
+
+
+
