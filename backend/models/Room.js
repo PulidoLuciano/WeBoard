@@ -29,7 +29,12 @@ const roomSchema = new Schema({
     initialTime:{
         type: Date,
     },
-    users: [usersSchema]
+    users: [usersSchema],
+    game: {
+        type: mongoose.Types.ObjectId,
+        ref: "Game"
+    },
+    gameData: {} //mongoose doesn't detect changes in this field, you must use {schema}.markModified("gameData") before save
 });
 
 module.exports = mongoose.model("Room", roomSchema);
