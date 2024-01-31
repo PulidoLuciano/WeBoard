@@ -19,6 +19,7 @@ const gameSchema = new Schema({
     mode: {
         type: String,
         enum: ["Singleplayer", "1v1", "AllvAll", "Utility"],
+        required: true
     }
 });
 
