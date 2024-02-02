@@ -10,4 +10,8 @@ router.get("/:userId", tryCatchFunction(controller.userData));
 
 router.get("/:userId/profile", tryCatchFunction(controller.userProfile));
 
+router.post("/login", tryCatchFunction(controller.accessUsername));
+
+router.post("/login-protected", tryCatchFunction(controller.accessProtectedAccount));
+
 module.exports = router;

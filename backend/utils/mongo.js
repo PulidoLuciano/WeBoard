@@ -15,6 +15,21 @@ exports.getUserById = async (id) => {
     return user;
 }
 
+exports.getUserByUsername = async (username) => {
+    const user = await User.findOne({username: username});
+    return user;
+}
+
+exports.createUser = async (username, password = null, email = null, photo = null) => {
+    const user = new User({
+        username: username,
+        email: email,
+        password: password,
+        photo: photo
+    });
+    return await user.save();
+}
+
 //GAMES
 
 exports.getGames = async () => {
