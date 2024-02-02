@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const userRouter = require("./routes/users");
 require("dotenv").config();
+const {NotFoundError} = require("./utils/errors");
 
 const app = express();
 const port = 3000;
@@ -28,6 +29,15 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.use("/users", userRouter);
+
+app.use((req, res, next) => {
+    const err = new NotFoundError(req.url);
+    next(err);
+});
+
+app.use((err, req, res, next) => {
+    res.status(err.statusCode).json({status: err.statusCode, error: err.message});
+})
 
 app.listen(port, () => {
     console.log(`Server listening on http://localhost:${port}`);

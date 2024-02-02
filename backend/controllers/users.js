@@ -1,14 +1,11 @@
-const db = require("./mongo");
+const db = require("../utils/mongo");
 
 exports.getAllUsers = async function(req, res){
-    try{
-        let limit = (req.query.limit) ? req.query.limit : 100;
-        const users = await db.getRandomUsers(limit);
-        res.json(users);
-    }catch{
-        res.send("error");
-    }
+    let limit = (req.query.limit) ? req.query.limit : 100;
+    const users = await db.getRandomUsers(limit);
+    res.json(users);
 }
+
 exports.userData = async function(req, res){
     try{
         const user = await db.getUserById(req.params.userId);
