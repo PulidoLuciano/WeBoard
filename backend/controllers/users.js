@@ -28,7 +28,6 @@ exports.userProfile = async function(req, res){
         const user = await db.getUserById(userId);
         profile.userData = user;
         const rankings = await db.getUserRankings(userId);
-        console.log(rankings);
         for(let i = 0; i < rankings.length; i++){
             let game = await db.getGameById(rankings[i].gameId.toString());
             profile.rankings.push({game: game.name, elo: rankings[i].elo});
