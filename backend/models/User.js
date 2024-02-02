@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 const userSchema = new Schema({
     username: {
         type: String, 
-        minLength: [2, "Username length must be at least 2, got {VALUE}"],
+        minLength: [1, "Username length must be at least 1, got {VALUE}"],
         maxLength: [30, "Username length must be lower than 30, got {VALUE}"], 
         required: [true, "Username is required"],
         trim: true
