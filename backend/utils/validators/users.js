@@ -8,18 +8,18 @@ exports.validateUser = (user) => {
 }
 
 exports.validateUserName = (username) => {
-    if(validator.validateRequired(username))
+    if(!validator.validateRequired(username))
         throw new ValidationError("Username is required");
-    if(validator.validateMaxLength(username, 30))
-        throw new ValidationError(`Username length must be lower than 30, got ${username.id}`);
+    if(!validator.validateMaxLength(username, 30))
+        throw new ValidationError(`Username length must be lower than 30, got ${username.length}`);
 }
 
 exports.validateUserEmail = (email) => {
-    if(validator.validateEmail(email))
+    if(!validator.validateEmail(email))
         throw new ValidationError(`${email} is not an email`);
 }
 
 exports.validateUserPassword = (email) => {
-    if(validator.validateBetweenLength(email, 5, 30))
+    if(!validator.validateBetweenLength(email, 5, 30))
         throw new ValidationError(`The password length must be between 5 and 30, got ${email.length}`);
 }

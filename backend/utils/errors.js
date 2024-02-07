@@ -3,6 +3,7 @@ const { MongooseError } = require("mongoose");
 const tryCatchFunction = (fn) => {
     return (req, res, next) => {
         fn(req, res).catch((error) => {
+            console.log(error);
             if(error instanceof MongooseError)
                 error = new DataBaseError();
             next(error);
@@ -11,7 +12,7 @@ const tryCatchFunction = (fn) => {
 }
 
 class AppError extends Error{
-    constructor(message, statusCode){
+    constructor(message = "Internal server error", statusCode = 500){
         super(message);
         this.statusCode = statusCode;
     }
@@ -35,5 +36,11 @@ class ValidationError extends AppError{
     }
 }
 
-module.exports = {NotFoundError, DataBaseError, ValidationError, tryCatchFunction}
+class AuthenticationError extends AppError{
+    constructor(message){
+        super(message, 401);
+    }
+}
+
+module.exports = {NotFoundError, DataBaseError, ValidationError, AuthenticationError, AppError,tryCatchFunction}
 

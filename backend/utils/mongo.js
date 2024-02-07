@@ -20,6 +20,11 @@ exports.getUserByUsername = async (username) => {
     return user;
 }
 
+exports.getUserByEmail = async (email) => {
+    const user = await User.findOne({email: email});
+    return user;
+}
+
 exports.createUser = async (username, password = null, email = null, photo = null) => {
     const user = new User({
         username: username,
@@ -28,6 +33,11 @@ exports.createUser = async (username, password = null, email = null, photo = nul
         photo: photo
     });
     return await user.save();
+}
+
+exports.protectUser = async (id, email, password) => {
+    const user = { email, password};
+    return await User.findOneAndUpdate({_id: id}, user);
 }
 
 //GAMES

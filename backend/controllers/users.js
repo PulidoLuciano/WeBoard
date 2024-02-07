@@ -1,5 +1,8 @@
 const db = require("../utils/mongo");
 const validator = require("../utils/validators/users");
+const {AuthenticationError, AppError, ValidationError} = require("../utils/errors");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 exports.getAllUsers = async function(req, res){
     let limit = (req.query.limit) ? req.query.limit : 100;
@@ -26,7 +29,7 @@ exports.userProfile = async function(req, res){
 }
 
 exports.accessUsername = async function(req, res){
-    let username = req.body.username;
+    let username = req.body.username || "";
     username.trim();
     let user = await db.getUserByUsername(username);
     if(!user){
@@ -34,16 +37,51 @@ exports.accessUsername = async function(req, res){
         user = await db.createUser(username);
     }
     if(user.password)
-        res.json({passwordRequired: true, username: user.username}); 
+        throw new AuthenticationError("Username is protected");
     else{
-        logInCookie(user.username);
+        logIn(user, res);
     }
 }
 
 exports.accessProtectedAccount = async function(req, res){
-    logInCookie(req.username);
+    let data = req.body;
+    let user = await db.getUserByEmail(data.email);
+    if(!user) throw new AuthenticationError("Email or password are not correct");
+    let comparison = await bcrypt.compare(data.password, user.password);
+    if(!comparison) throw new AuthenticationError("Email or password are not correct");
+    logIn(user, res);
 }
 
-const logInCookie = (username) => {
-    //TO DO ACCESS COOKIE FOR FRONTEND
+exports.protectUsername = async function(req, res){
+    let user = await db.getUserById(req.user.userId);
+    if(user.password) throw new AuthenticationError("The user is protected already");
+    let email = req.body.email ?? "";
+    email.trim();
+    let password = req.body.password ?? "";
+    let confirmPassword = req.body.confirmPassword ?? "";
+
+    let userEmail = await db.getUserByEmail(email);
+    if(userEmail) throw new AuthenticationError("The email is associated with another username");
+    validator.validateUserEmail(email);
+    validator.validateUserPassword(password);
+    if(password != confirmPassword) throw new ValidationError("The passwords don't coincide");
+    
+    bcrypt.hash(req.body.password, 10, async (err, hash) => {
+        if(err) throw new AppError();
+        await db.protectUser(user._id, email, hash);
+    });
+    res.send({message: "Protection successful"});
+}
+
+const logIn = (user, res) => {
+    let token = generateLogInToken(user._id, user.username);
+    res.status(200).send({
+        message: "Login successful",
+        username: user.username,
+        token
+    })
+}
+
+const generateLogInToken = (userId, username) => {
+    return jwt.sign({userId, username}, "Secret key");
 }
