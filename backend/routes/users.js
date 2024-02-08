@@ -15,6 +15,14 @@ router.post("/login", tryCatchFunction(controller.accessUsername));
 
 router.post("/login-protected", tryCatchFunction(controller.accessProtectedAccount));
 
-router.post("/protect", auth, tryCatchFunction(controller.protectUsername));
+router.put("/protect", auth, tryCatchFunction(controller.protectUsername));
+
+router.put("/verify", tryCatchFunction(controller.verifyUsername));
+
+router.put("/recover", tryCatchFunction(controller.recoverAccount));
+
+router.put("/password", tryCatchFunction(controller.changePassword));
+
+router.put("/photo", tryCatchFunction(controller.changePhoto));
 
 module.exports = router;

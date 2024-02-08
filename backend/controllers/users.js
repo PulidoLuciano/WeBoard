@@ -49,6 +49,11 @@ exports.accessProtectedAccount = async function(req, res){
     if(!user) throw new AuthenticationError("Email or password are not correct");
     let comparison = await bcrypt.compare(data.password, user.password);
     if(!comparison) throw new AuthenticationError("Email or password are not correct");
+    if(!user.verified){
+        let verifyToken = await db.getVerifyTokenByUserId(user._id);
+        sendVerificationEmail(user.email, user.username, verifyToken.token);
+        throw new AuthenticationError("The account it's not verified, please check your email");
+    }
     logIn(user, res);
 }
 
@@ -70,7 +75,19 @@ exports.protectUsername = async function(req, res){
         if(err) throw new AppError();
         await db.protectUser(user._id, email, hash);
     });
+    
+    let token = await bcrypt.hash(user.username + Math.random() * 10000,8);
+    let verifyToken = await db.createVerifyToken(token, user._id);
+    sendVerificationEmail(user.email, user.username, verifyToken.token);
+   
     res.send({message: "Protection successful"});
+}
+
+exports.verifyUsername = async (req, res) => {
+    let verifyToken = await db.getVerifyToken(req.query.token);
+    if(!verifyToken) throw new AuthenticationError("Token doesn't exists");
+    await db.verifyUser(verifyToken.userId, verifyToken._id);
+    res.send({message: "User verified correctly"});
 }
 
 const logIn = (user, res) => {
@@ -84,4 +101,8 @@ const logIn = (user, res) => {
 
 const generateLogInToken = (userId, username) => {
     return jwt.sign({userId, username}, "Secret key");
+}
+
+const sendVerificationEmail = (userEmail, username, verifyToken) => {
+    //TODO
 }

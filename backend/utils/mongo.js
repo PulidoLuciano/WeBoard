@@ -2,6 +2,7 @@ const User = require("../models/User");
 const Game = require("../models/Game");
 const Ranking = require("../models/Ranking");
 const Room = require("../models/Room");
+const VerifyToken = require("../models/VerifyToken");
 
 //USERS
 
@@ -40,6 +41,12 @@ exports.protectUser = async (id, email, password) => {
     return await User.findOneAndUpdate({_id: id}, user);
 }
 
+exports.verifyUser = async (userId, tokenId) => {
+    const user = {verified: true};
+    await VerifyToken.findByIdAndDelete(tokenId);
+    return await User.findOneAndUpdate({_id: userId}, user);
+}
+
 //GAMES
 
 exports.getGames = async () => {
@@ -74,4 +81,26 @@ exports.getRooms = async () => {
 exports.getRoomById = async (id) => {
     const room = await Room.findById(id).exec();
     return room;
+}
+
+//VERIFY TOKEN
+
+exports.createVerifyToken = async (token, userId) => {
+    let verifyToken = new VerifyToken({
+        token,
+        userId
+    });
+    return await verifyToken.save();
+}
+
+exports.getVerifyTokenByUserId = async (userId) => {
+    return await VerifyToken.findOne({userId: userId});
+}
+
+exports.getVerifyTokenById = async (id) => {
+    return await VerifyToken.findById(id).exec();
+}
+
+exports.getVerifyToken = async (token) => {
+    return await VerifyToken.findOne({token: token}).exec();
 }
