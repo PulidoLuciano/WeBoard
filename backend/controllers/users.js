@@ -1,6 +1,6 @@
 const db = require("../utils/mongo");
 const validator = require("../utils/validators/users");
-const {AuthenticationError, AppError, ValidationError} = require("../utils/errors");
+const {AuthenticationError, AppError, ValidationError, NotFoundError} = require("../utils/errors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -90,6 +90,34 @@ exports.verifyUsername = async (req, res) => {
     res.send({message: "User verified correctly"});
 }
 
+exports.recoverAccount = async (req, res) => {
+    let user = await db.getUserByEmail(req.body.email);
+    if(!user) throw new AuthenticationError("The email is not associated with any username");
+    let newPassword = "randomPassword";
+    bcrypt.hash(newPassword, 10, async (err, hash) => {
+        if(err) throw new AppError();
+        await db.changePassword(user._id, hash);
+    });
+    sendRecoverEmail(user.email, user.username, newPassword);
+    res.send({message: "New password generated successfully", newPassword});
+}
+
+exports.changePassword = async (req, res) => {
+    let user = await db.getUserById(req.user.userId);
+    let oldPassword = req.body.oldPassword ?? "";
+    let isEqual = bcrypt.compare(oldPassword, user.password);
+    if(!isEqual) throw new AuthenticationError("The old password is not correct");
+    let password = req.body.password ?? "";
+    let confirmPassword = req.body.confirmPassword ?? "";
+    validator.validateUserPassword(password);
+    if(password != confirmPassword) throw new ValidationError("The passwords don't coincide");
+    bcrypt.hash(req.body.password, 10, async (err, hash) => {
+        if(err) throw new AppError();
+        await db.changePassword(user._id, hash);
+    });
+    res.send({message: "Password updated successfully"});
+}
+
 const logIn = (user, res) => {
     let token = generateLogInToken(user._id, user.username);
     res.status(200).send({
@@ -104,5 +132,9 @@ const generateLogInToken = (userId, username) => {
 }
 
 const sendVerificationEmail = (userEmail, username, verifyToken) => {
+    //TODO
+}
+
+const sendRecoverEmail = (userEmail, username, password) => {
     //TODO
 }

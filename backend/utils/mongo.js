@@ -47,6 +47,11 @@ exports.verifyUser = async (userId, tokenId) => {
     return await User.findOneAndUpdate({_id: userId}, user);
 }
 
+exports.changePassword = async (userId, password) => {
+    const user = {password};
+    return await User.findOneAndUpdate({_id: userId}, user);
+}
+
 //GAMES
 
 exports.getGames = async () => {

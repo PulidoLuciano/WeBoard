@@ -21,8 +21,8 @@ router.put("/verify", tryCatchFunction(controller.verifyUsername));
 
 router.put("/recover", tryCatchFunction(controller.recoverAccount));
 
-router.put("/password", tryCatchFunction(controller.changePassword));
+router.put("/password", auth,tryCatchFunction(controller.changePassword));
 
-router.put("/photo", tryCatchFunction(controller.changePhoto));
+router.put("/photo", auth,tryCatchFunction(controller.changePhoto));
 
 module.exports = router;
