@@ -118,6 +118,11 @@ exports.changePassword = async (req, res) => {
     res.send({message: "Password updated successfully"});
 }
 
+exports.changePhoto = async (req, res) => {
+    await db.changePhoto(req.user.userId, `http://localhost:3000/public/avatars/${req.file.filename}`);
+    res.send({message: "Photo uploaded"});
+}
+
 const logIn = (user, res) => {
     let token = generateLogInToken(user._id, user.username);
     res.status(200).send({

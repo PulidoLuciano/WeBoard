@@ -52,6 +52,11 @@ exports.changePassword = async (userId, password) => {
     return await User.findOneAndUpdate({_id: userId}, user);
 }
 
+exports.changePhoto = async (userId, photoUrl) => {
+    const user = {photo: photoUrl};
+    return await User.findByIdAndUpdate(userId, user);
+}
+
 //GAMES
 
 exports.getGames = async () => {

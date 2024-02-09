@@ -28,6 +28,8 @@ app.use(express.json());
 
 app.use(express.urlencoded({extended: true}));
 
+app.use("/public", express.static(__dirname + '/images'));
+
 app.use("/users", userRouter);
 
 app.use((req, res, next) => {
@@ -36,7 +38,7 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-    res.status(err.statusCode).json({status: err.statusCode, error: err.message});
+    res.status(err.statusCode ?? 500).json({status: err.statusCode ?? 500, error: err.message ?? "Internal server error"});
 })
 
 app.listen(port, () => {
