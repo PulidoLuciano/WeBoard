@@ -3,6 +3,8 @@ const validator = require("../utils/validators/users");
 const {AuthenticationError, AppError, ValidationError, NotFoundError} = require("../utils/errors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const fs = require("fs");
+const path = require("path");
 
 exports.getAllUsers = async function(req, res){
     let limit = (req.query.limit) ? req.query.limit : 100;
@@ -119,6 +121,11 @@ exports.changePassword = async (req, res) => {
 }
 
 exports.changePhoto = async (req, res) => {
+    let user = await db.getUserById(req.user.userId);
+    let fileName = user.photo.split("/");
+    fileName = fileName[fileName.length - 1];
+    let pathImage = path.normalize(__dirname + `/../images/avatars/${fileName}`);
+    fs.rmSync(pathImage);
     await db.changePhoto(req.user.userId, `http://localhost:3000/public/avatars/${req.file.filename}`);
     res.send({message: "Photo uploaded"});
 }
