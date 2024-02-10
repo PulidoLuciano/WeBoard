@@ -1,7 +1,7 @@
 const express = require("express");
 const controller = require("../controllers/users");
 const {tryCatchFunction, AppError} = require("../utils/errors");
-const auth = require("../utils/auth");
+const {auth} = require("../utils/auth");
 const path = require("path");
 const multer = require("multer");
 const upload = multer({

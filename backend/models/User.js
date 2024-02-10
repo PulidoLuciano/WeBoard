@@ -29,6 +29,10 @@ const userSchema = new Schema({
     verified: {
         type: Boolean,
         default: false
+    },
+    admin: {
+        type: Boolean,
+        default: false
     }
 });
 

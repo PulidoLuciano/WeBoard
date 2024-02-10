@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { AuthenticationError } = require("./errors");
 
-module.exports = async (req, res, next) => {
+exports.auth = async (req, res, next) => {
   try {
     const token = await req.headers.authorization.split(" ")[1];
     const decodedToken = await jwt.verify(token, "Secret key");
@@ -15,3 +15,15 @@ module.exports = async (req, res, next) => {
     });
   }
 };
+
+exports.authAdmin = async (req, res, next) => {
+  try{
+    if(!req.user.isAdmin) throw new AuthenticationError("You must to be an admin to do that");
+    next();
+  }catch(e){
+    console.log(e);
+    res.status(401).json({
+      error: new AuthenticationError("You must to be logged in"),
+    });
+  }
+}
