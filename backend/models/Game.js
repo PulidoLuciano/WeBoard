@@ -2,6 +2,17 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
+const instructionPartSchema = new Schema({
+    type: {
+        type: String,
+        enum: ["title, paragraph, image"],
+        require: true
+    },
+    content: {
+        type: String,
+    }
+})
+
 const gameSchema = new Schema({
     name: {
         type: String, 
@@ -10,15 +21,13 @@ const gameSchema = new Schema({
         required: true,
         trim: true
     },
-    instructions: {
-        type: [String],
-    },
+    instructions: [instructionPartSchema],
     image: {
         type: String
     },
     mode: {
         type: String,
-        enum: ["Singleplayer", "1v1", "AllvAll", "Utility"],
+        enum: ["singleplayer", "onevone", "allvall", "utility"],
         required: true
     }
 });

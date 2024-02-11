@@ -3,6 +3,7 @@ const validator = require("express-validator");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const userRouter = require("./routes/users");
+const gameRouter = require("./routes/games");
 require("dotenv").config();
 const {NotFoundError} = require("./utils/errors");
 
@@ -31,6 +32,8 @@ app.use(express.urlencoded({extended: true}));
 app.use("/public", express.static(__dirname + '/images'));
 
 app.use("/users", userRouter);
+
+app.use("/games", gameRouter);
 
 app.use((req, res, next) => {
     const err = new NotFoundError(req.url);

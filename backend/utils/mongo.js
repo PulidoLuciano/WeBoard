@@ -69,6 +69,28 @@ exports.getGameById = async (id) => {
     return game;
 }
 
+exports.getGame = async (name) => {
+    const game = await Game.findOne({name: name}).exec();
+    return game;
+}
+
+exports.getGamesByMode = async (mode) => {
+    return await Game.find({mode: mode}).exec();
+}
+
+exports.createGame = async (game) => {
+    const newGame = new Game(game);
+    return await newGame.save();
+}
+
+exports.updateGame = async (id, updatedGame) => {
+    return await Game.findByIdAndUpdate(id, updatedGame);
+}
+
+exports.deleteGame = async (id) => {
+    return await Game.findByIdAndDelete(id);
+}
+
 //RANKINGS
 
 exports.getRankingById = async (id) => {
@@ -79,6 +101,20 @@ exports.getRankingById = async (id) => {
 exports.getUserRankings = async (id) => {
     const rankings = await Ranking.find({userId: {$eq: id}}).exec();
     return rankings; 
+}
+
+exports.getGameRankings = async (gameId) => {
+    return await Ranking.find({gameId: {$eq: gameId}}).sort({elo: -1}).limit(100).exec();
+}
+
+exports.getUserGameRanking = async (userId, gameId) => {
+    let elo = (await Ranking.find({gameId: {$eq: gameId}, userId: {$eq: userId}}).exec()).elo;
+    let position = (await Ranking.find({elo: {$gt: elo}})).length;
+    let ranking = {
+        elo,
+        position,
+    }
+    return ranking;
 }
 
 //ROOMS

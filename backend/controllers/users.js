@@ -131,7 +131,7 @@ exports.changePhoto = async (req, res) => {
 }
 
 const logIn = (user, res) => {
-    let token = generateLogInToken(user._id, user.username);
+    let token = generateLogInToken(user._id, user.username, user.isAdmin);
     res.status(200).send({
         message: "Login successful",
         username: user.username,
@@ -139,8 +139,8 @@ const logIn = (user, res) => {
     })
 }
 
-const generateLogInToken = (userId, username) => {
-    return jwt.sign({userId, username}, "Secret key");
+const generateLogInToken = (userId, username, isAdmin) => {
+    return jwt.sign({userId, username, isAdmin}, "Secret key");
 }
 
 const sendVerificationEmail = (userEmail, username, verifyToken) => {
