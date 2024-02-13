@@ -19,7 +19,7 @@ const usersSchema = new Schema({
 const roomSchema = new Schema({
     type: {
         type: String,
-        enum: ["Private", "Public"],
+        enum: ["private", "public"],
     },
     password: {
         type: String,
@@ -27,7 +27,7 @@ const roomSchema = new Schema({
         maxLength: [30, "Password length must be lower than 30, got {VALUE}"],
     },
     initialTime:{
-        type: Date,
+        type: Number,
     },
     users: [usersSchema],
     game: {

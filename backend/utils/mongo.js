@@ -129,6 +129,17 @@ exports.getRoomById = async (id) => {
     return room;
 }
 
+exports.createRoom = async (game, users, type = "public", password = null) => {
+    const room = new Room({
+        game: game._id,
+        users: users.map(user => {return {user: user, score: 0, hasLoosed: false}}),
+        type,
+        password,
+        initialTime: Date.now(),
+    });
+    return await room.save();
+}
+
 //VERIFY TOKEN
 
 exports.createVerifyToken = async (token, userId) => {
