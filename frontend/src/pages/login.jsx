@@ -14,31 +14,13 @@ export default function Login(){
         let user = {
             username: event.target.username.value
         }
-        let response = fetch("http://localhost:3000/users/login", {
-            method: "POST",
-            body: JSON.stringify(user),
-            headers: {
-                "Content-Type": "application/json",
-            }
-        }).then(async (res) => {
-            let data= await res.json();
-            localStorage.setItem("credentials", data.token);
-            location.replace("/");
-        }).catch(async (err) => {
-            let reason = await err.json();
-            console.log(reason);
-        });
+        loginRequest("http://localhost:3000/users/login", user);
     }
 
-    async function sendProtectedForm(event){
-        event.preventDefault();
-        let user = {
-            email: event.target.email.value,
-            password: event.target.password.value,
-        }
-        let response = await fetch("http://localhost:3000/users/login-protected", {
+    async function loginRequest(url, userData){
+        let response = await fetch(url, {
             method: "POST",
-            body: JSON.stringify(user),
+            body: JSON.stringify(userData),
             headers: {
                 "Content-Type": "application/json"
             }
@@ -50,6 +32,15 @@ export default function Login(){
         }
         localStorage.setItem("credentials", data.token);
         location.replace("/");
+    }
+
+    async function sendProtectedForm(event){
+        event.preventDefault();
+        let user = {
+            email: event.target.email.value,
+            password: event.target.password.value,
+        }
+        loginRequest("http://localhost:3000/users/login-protected", user);
     }
 
     useEffect(() => {
