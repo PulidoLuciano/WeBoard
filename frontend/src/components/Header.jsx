@@ -12,7 +12,7 @@ export default function Header({user}){
                     ? //There is a username picked?
                     <UserHeader user={user}></UserHeader>
                     :
-                    <LinkHeader text={"Pick a username"} href={"/login"}></LinkHeader>
+                    <LinkHeader text={"Start"} href={"/login"}></LinkHeader>
                 }
             </div>
         </header>
