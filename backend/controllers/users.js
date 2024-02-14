@@ -130,6 +130,11 @@ exports.changePhoto = async (req, res) => {
     res.send({message: "Photo uploaded"});
 }
 
+exports.getLoginData = async (req, res) => {
+    let user = await db.getUserById(req.user.userId);
+    res.send(user);
+}
+
 const logIn = (user, res) => {
     let token = generateLogInToken(user._id, user.username, user.isAdmin);
     res.status(200).send({

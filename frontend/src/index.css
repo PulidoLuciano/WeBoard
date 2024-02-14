@@ -1,3 +1,60 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "Pixelify-Sans";
+    src: url("assets/fonts/PixelifySans-VariableFont_wght.ttf") format("truetype");
+}
+
+*{
+    font-family: "Pixelify-Sans", sans-serif;
+}
+
+p{
+    font-size: 1rem;
+    text-wrap: pretty;
+    color: #dddddd;
+}
+
+label{
+    font-size: 1rem;
+    text-wrap: pretty;
+    color: white;
+}
+   
+h1{
+    font-size: 2.5rem; /* 3 times the body text */
+    font-weight: bold;
+    text-wrap: balance;
+    color: white;
+}
+   
+h2{
+    font-size: 2rem; /* 2 times the body text */
+    font-weight: bold;
+    text-wrap: balance;
+    color: white;
+}
+   
+h3{
+    font-size: 1.5rem; /* 1 ½ times the body text */
+    text-wrap: balance;
+    color: white;
+}
+   
+figcaption{
+    font-size: 0.75rem; /* ¾ of the body text */
+    text-wrap: pretty;
+}
+
+.button-shadow{
+    border-radius: 10px;
+    border: 2px solid;
+    box-shadow: 3px 3px;
+}
+
+.button-shadow:active {
+    box-shadow: none;
+    transform: translate(3px, 3px);
+  }

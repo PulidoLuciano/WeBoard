@@ -11,7 +11,7 @@ exports.auth = async (req, res, next) => {
   } catch (error) {
     console.log(error);
     res.status(401).json({
-      error: new AuthenticationError("You must to be logged in"),
+      message: "You must to be logged in",
     });
   }
 };

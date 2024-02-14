@@ -12,6 +12,7 @@ exports.validateUserName = (username) => {
         throw new ValidationError("Username is required");
     if(!validator.validateMaxLength(username, 30))
         throw new ValidationError(`Username length must be lower than 30, got ${username.length}`);
+    if(/[^A-Za-z0-9_-]/.test(username)) throw new ValidationError(`Username must have only letters, numbers, - and _`)
 }
 
 exports.validateUserEmail = (email) => {

@@ -30,6 +30,8 @@ const router = express.Router();
 
 router.get("/", tryCatchFunction(controller.getAllUsers));
 
+router.get("/login", auth, tryCatchFunction(controller.getLoginData));
+
 router.get("/:userId", tryCatchFunction(controller.userData));
 
 router.get("/:userId/profile", tryCatchFunction(controller.userProfile));
