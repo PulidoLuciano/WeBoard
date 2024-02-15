@@ -24,7 +24,7 @@ const router = createBrowserRouter([
       },
       {
         path: "user/:username",
-        element: <FetchingPage url={`http://localhost:3000/users/${location.pathname.split("/").at(-1)}/profile`}><Profile></Profile></FetchingPage>
+        element: <FetchingPage url={`http://localhost:3000/users/:username/profile`}><Profile></Profile></FetchingPage>
       }
     ]
   }

@@ -1,9 +1,12 @@
 import React, { useEffect } from "react"
 import useFetch from "../logic/hooks/useFetch"
+import { useParams } from "react-router-dom";
+import replaceParams from "../logic/replaceParams";
 
 export default function FetchingPage({children, url}){
     
-    const {data, error, loading} = useFetch(url);
+    const params = useParams();
+    const {data, error, loading} = useFetch(replaceParams(url, params));
     
     useEffect(() => {
         console.log(data, error, loading);

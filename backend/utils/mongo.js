@@ -26,7 +26,7 @@ exports.getUserByEmail = async (email) => {
     return user;
 }
 
-exports.createUser = async (username, password = null, email = null, photo = null) => {
+exports.createUser = async (username, password = null, email = null, photo = "http://localhost:3000/public/avatars/none.jpg") => {
     const user = new User({
         username: username,
         email: email,

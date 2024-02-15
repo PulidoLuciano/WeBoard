@@ -24,7 +24,7 @@ export default function UserHeader({user}){
         <>
         <nav className="group relative min-w-[150px] hover:bg-slate-900 max-md:hidden">
             <Link to={`/user/${user.username}`} className=" flex gap-2 hover:scale-105 transition-transform">
-                <img src={user.photo ?? "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"} alt="User's profile image" className=" size-8 rounded-full"/>
+                <img src={user.photo} alt="User's profile image" className=" size-8 rounded-full"/>
                 <p className="text-white font-bold text-xl max-sm:hidden">{user.username}</p>
             </Link>
             <div className="absolute bg-slate-900 flex-col p-3 w-full text-xl hidden group-hover:flex">
