@@ -10,35 +10,15 @@ export default function Profile({data}){
                 {
                     (data.ranking) ?
                     data.rankings.map((ranking) => 
-                    <div className="flex gap-4">
+                    <div className="flex gap-4 justify-center">
                         <p className="w-32">{ranking.game}</p>
-                        <div className="border-b-2 border-dotted border-gray-500 w-2/3"></div>
+                        <div className="border-b-2 border-dotted border-gray-500 w-2/3 max-[768px]:w-1/3"></div>
                         <p className="text-right">{ranking.elo}</p>
                     </div>
                     )
                     :
                     <p>There's not elos yet...</p>
                 }
-                <div className="flex gap-4 text-center">
-                    <p className="w-32">Minesweeper</p>
-                    <div className="border-b-2 border-dotted border-gray-500 w-2/3 max-[768px]:w-1/3"></div>
-                    <p className="text-right">00:09:30</p>
-                </div>
-                <div className="flex gap-4 text-center">
-                    <p className="w-32">Domino</p>
-                    <div className="border-b-2 border-dotted border-gray-500 w-2/3 max-[768px]:w-1/3"></div>
-                    <p className="text-right">2500</p>
-                </div>
-                <div className="flex gap-4 text-center">
-                    <p className="w-32">Minesweeper</p>
-                    <div className="border-b-2 border-dotted border-gray-500 w-2/3 max-[768px]:w-1/3"></div>
-                    <p className="text-right">00:09:30</p>
-                </div>
-                <div className="flex gap-4 text-center">
-                    <p className="w-32">Domino</p>
-                    <div className="border-b-2 border-dotted border-gray-500 w-2/3 max-[768px]:w-1/3"></div>
-                    <p className="text-right">2500</p>
-                </div>
             </section>
         </>
     )
