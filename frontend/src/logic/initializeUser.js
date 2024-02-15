@@ -1,5 +1,4 @@
 export default async function initializeUser(setUser){
-    console.log("test")
     let token = localStorage.getItem("credentials");
     if(!token) return;
     let response = await fetch(`http://localhost:3000/users/login`,{

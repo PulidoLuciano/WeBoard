@@ -34,7 +34,7 @@ router.get("/login", auth, tryCatchFunction(controller.getLoginData));
 
 router.get("/:userId", tryCatchFunction(controller.userData));
 
-router.get("/:userId/profile", tryCatchFunction(controller.userProfile));
+router.get("/:username/profile", tryCatchFunction(controller.userProfile));
 
 router.post("/login", tryCatchFunction(controller.accessUsername));
 

@@ -18,11 +18,11 @@ exports.userData = async function(req, res){
 }
 
 exports.userProfile = async function(req, res){
-    let userId = req.params.userId;
+    let username = req.params.username;
     var profile = {userData: null, rankings: []};
-    const user = await db.getUserById(userId);
+    const user = await db.getUserByUsername(username);
     profile.userData = {username: user.username, photo: user.photo, protected: (user.password) ? true : false};
-    const rankings = await db.getUserRankings(userId);
+    const rankings = await db.getUserRankings(user._id);
     for(let i = 0; i < rankings.length; i++){
         let game = await db.getGameById(rankings[i].gameId.toString());
         profile.rankings.push({game: game.name, elo: rankings[i].elo});

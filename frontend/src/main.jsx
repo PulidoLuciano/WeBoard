@@ -5,6 +5,8 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import Foundation from './foundation'
 import Login from './pages/login'
 import MainPage from './pages/main'
+import Profile from './pages/profile'
+import FetchingPage from './components/fetchingPage'
 
 const router = createBrowserRouter([
   {
@@ -19,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login></Login>
+      },
+      {
+        path: "user/:username",
+        element: <FetchingPage url={`http://localhost:3000/users/${location.pathname.split("/").at(-1)}/profile`}><Profile></Profile></FetchingPage>
       }
     ]
   }
