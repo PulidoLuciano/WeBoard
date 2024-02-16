@@ -57,4 +57,4 @@ figcaption{
 .button-shadow:active {
     box-shadow: none;
     transform: translate(3px, 3px);
-  }
+}

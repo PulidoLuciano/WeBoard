@@ -6,6 +6,7 @@ import LogoutImage from "../assets/images/logout.svg"
 import MenuImage from "../assets/images/menu.svg"
 import CloseImage from "../assets/images/close.svg"
 import { useState } from "react"
+import Volume from "./Volume"
 
 export default function UserHeader({user}){
     
@@ -32,7 +33,7 @@ export default function UserHeader({user}){
                 <hr></hr>
                 <Link to={`/account`} className=" flex gap-2 hover:scale-105 transition-transform p-2"><img src={AccountImage} alt="Account icon"/> Account</Link>
                 <hr></hr>
-                <Link to={`/settings`} className=" flex gap-2 hover:scale-105 transition-transform p-2"><img src={SettingImage} alt="Settings icon"/> Settings</Link>
+                <Volume className={"p-2"}></Volume>
                 <hr></hr>
                 <Link to={`/`} className=" flex gap-2 hover:scale-105 transition-transform p-2" onClick={logOut}><img src={LogoutImage} alt="Logout icon"/> Log out</Link>
             </div>
@@ -51,7 +52,7 @@ export default function UserHeader({user}){
                 <hr></hr>
                 <Link to={`/account`} className=" flex gap-2 hover:scale-105 transition-transform p-2" onClick={clickMenuButton}><img src={AccountImage} alt="Account icon"/> Account</Link>
                 <hr></hr>
-                <Link to={`/settings`} className=" flex gap-2 hover:scale-105 transition-transform p-2" onClick={clickMenuButton}><img src={SettingImage} alt="Settings icon"/> Settings</Link>
+                <Volume className={"p-2 w-full"}></Volume>
                 <hr></hr>
                 <Link to={`/`} className=" flex gap-2 hover:scale-105 transition-transform p-2" onClick={logOut}><img src={LogoutImage} alt="Logout icon"/> Log out</Link>
             </div>
