@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react"
-import checkUserLoggedIn from "../logic/checkUserLoggedIn"
 import Button from "../components/Button";
 import Input from "../components/Input";
 
@@ -14,7 +13,7 @@ export default function Login(){
         let user = {
             username: event.target.username.value
         }
-        loginRequest("http://localhost:3000/users/login", user);
+        loginRequest(`http://${import.meta.env.VITE_BACKENDURL}/users/login`, user);
     }
 
     async function loginRequest(url, userData){
@@ -40,7 +39,7 @@ export default function Login(){
             email: event.target.email.value,
             password: event.target.password.value,
         }
-        loginRequest("http://localhost:3000/users/login-protected", user);
+        loginRequest(`http://${import.meta.env.VITE_BACKENDURL}/users/login-protected`, user);
     }
 
     useEffect(() => {
@@ -87,7 +86,7 @@ export default function Login(){
                 <form action="" method="post" onSubmit={sendProtectedForm}>
                     <h2>Do you have a protected username?</h2>
                     <p className="mb-2">Type your data here to log in with your protected username</p>
-                    <Input label={"E-mail"} type={"text"} id={"email"} name={"email"} className={"w-2/3"}></Input>
+                    <Input label={"E-mail"} type={"email"} id={"email"} name={"email"} className={"w-2/3"}></Input>
                     <Input label={"Password"} type={"password"} id={"password"} name={"password"} className={"w-2/3"}></Input>
                     <Button>Submit</Button>
                 </form>
@@ -128,7 +127,7 @@ export default function Login(){
                     <form action="" method="post" onSubmit={sendProtectedForm}>
                         <h2>Do you have a protected username?</h2>
                         <p className="mb-2">Type your data here to log in with your protected username</p>
-                        <Input label={"E-mail"} type={"text"} id={"email"} name={"email"} className={"items-center"}></Input>
+                        <Input label={"E-mail"} type={"email"} id={"email"} name={"email"} className={"items-center"}></Input>
                         <Input label={"Password"} type={"password"} id={"password"} name={"password"} className={"items-center"}></Input>
                         <Button className={"mt-4"}>Submit</Button>
                     </form>

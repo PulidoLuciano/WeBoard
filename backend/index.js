@@ -19,7 +19,7 @@ async function main(){
 }
 
 //Allow CORS
-const allowedOrigins = ["http://localhost:5173"];
+const allowedOrigins = ["http://localhost:5173", "http://192.168.100.20:5173"];
 const options = {
     origin: allowedOrigins
 };

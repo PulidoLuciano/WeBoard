@@ -7,6 +7,8 @@ import Login from './pages/login'
 import MainPage from './pages/main'
 import Profile from './pages/profile'
 import FetchingPage from './components/fetchingPage'
+import ProtectedPage from './components/protectedPage'
+import Account from './pages/account'
 
 const router = createBrowserRouter([
   {
@@ -24,7 +26,11 @@ const router = createBrowserRouter([
       },
       {
         path: "user/:username",
-        element: <FetchingPage url={`http://localhost:3000/users/:username/profile`}><Profile></Profile></FetchingPage>
+        element: <FetchingPage url={`http://${import.meta.env.VITE_BACKENDURL}/users/:username/profile`}><Profile></Profile></FetchingPage>
+      },
+      {
+        path: "account",
+        element: <ProtectedPage><Account></Account></ProtectedPage>
       }
     ]
   }

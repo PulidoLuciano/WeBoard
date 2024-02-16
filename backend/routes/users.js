@@ -48,6 +48,6 @@ router.put("/recover", tryCatchFunction(controller.recoverAccount));
 
 router.put("/password", auth,tryCatchFunction(controller.changePassword));
 
-router.put("/photo", auth, upload.single("profilePhoto"),tryCatchFunction(controller.changePhoto));
+router.put("/photo", auth, upload.single("profilePhoto"), tryCatchFunction(controller.changePhoto));
 
 module.exports = router;

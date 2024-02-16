@@ -1,7 +1,7 @@
 export default async function initializeUser(setUser){
     let token = localStorage.getItem("credentials");
     if(!token) return;
-    let response = await fetch(`http://localhost:3000/users/login`,{
+    let response = await fetch(`http://${import.meta.env.VITE_BACKENDURL}/users/login`,{
         method: "GET",
         headers: {
             'Authorization': "Bearer " + localStorage.getItem("credentials"),

@@ -7,10 +7,6 @@ export default function FetchingPage({children, url}){
     
     const params = useParams();
     const {data, error, loading} = useFetch(replaceParams(url, params));
-    
-    useEffect(() => {
-        console.log(data, error, loading);
-    }, [data, error, loading]);
 
     return (
         <>
