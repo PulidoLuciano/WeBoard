@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       {
         path:"/",
-        element: <MainPage></MainPage>
+        element: <FetchingPage url={`http://${import.meta.env.VITE_BACKENDURL}/games`}><MainPage></MainPage></FetchingPage>
       },
       {
         path: "login",
