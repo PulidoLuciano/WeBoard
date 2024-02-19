@@ -21,22 +21,28 @@ exports.getGame = async (req, res) => {
 }
 
 exports.getGameRanking = async (req, res) => {
-    let name = (req.params.game).toString().toLowerCase();
+    let name = req.params.game;
     let game = await db.getGame(name);
-    res.send(await db.getGameRankings(game._id));
+    let ranking = await db.getGameRankings(game._id);
+    let completeRanking = [];
+    for(let element of ranking){
+        let user = await db.getUserById(element.userId);
+        completeRanking.push({id: element._id, username: user.username, elo: element.elo});
+    }
+    res.send({game, ranking: completeRanking});
 }
 
 exports.getUserRanking = async (req, res) => {
-    let name = (req.params.game).toString().toLowerCase();
+    let name = req.params.game;
     let game = await db.getGame(name);
-    res.send(await db.getGameRankings(game._id, req.user._id));
+    res.send({username: req.user.username, ranking: await db.getUserGameRanking(req.user.userId, game._id)});
 }
 
 exports.createGame = async (req, res) => {
     let game = {
         name: req.body.name,
         mode: req.body.mode,
-        image: `http://localhost:3000/public/games/${req.file.filename}`,
+        image: `http://${process.env.DOMAIN}/public/games/${req.file.filename}`,
         instructions: [],
     }
     await validator.validateGame(game);

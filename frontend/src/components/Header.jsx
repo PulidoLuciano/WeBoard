@@ -4,7 +4,7 @@ import LinkHeader from "./LinkHeader";
 
 export default function Header({user}){
     return(
-        <header className=" h-16 p-4 flex justify-center">
+        <header className=" h-16 p-4 flex justify-center z-50">
             <div className="flex justify-between h-full items-center max-w-screen-xl w-full">
                 <Logotype></Logotype>
                 {

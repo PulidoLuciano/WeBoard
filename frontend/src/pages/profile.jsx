@@ -1,4 +1,14 @@
-export default function Profile({data}){
+import FetchingPage from "../components/fetchingPage"
+
+export default function Profile(){
+    return(
+        <FetchingPage url={`http://${import.meta.env.VITE_BACKENDURL}/users/:username/profile`}>
+            <Content></Content>
+        </FetchingPage>
+    )
+}
+
+function Content({data}){
     return(
         <>
             <section className="mx-auto max-w-5xl my-11 flex gap-9 justify-center items-center max-[768px]:flex-col max-[768px]:mx-0">

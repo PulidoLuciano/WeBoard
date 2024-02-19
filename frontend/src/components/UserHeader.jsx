@@ -28,7 +28,7 @@ export default function UserHeader({user}){
                 <img src={user.photo} alt="User's profile image" className=" size-8 rounded-full"/>
                 <p className="text-white font-bold text-xl max-sm:hidden">{user.username}</p>
             </Link>
-            <div className="absolute bg-slate-900 flex-col p-3 w-full text-xl hidden group-hover:flex">
+            <div className="absolute bg-slate-900 flex-col p-3 w-full text-xl hidden group-hover:flex z-50">
                 <Link to={`/user/${user.username}`} className=" flex gap-2 hover:scale-105 transition-transform p-2"><img src={ProfileImage} alt="Profile icon"/> Profile</Link>
                 <hr></hr>
                 <Link to={`/account`} className=" flex gap-2 hover:scale-105 transition-transform p-2"><img src={AccountImage} alt="Account icon"/> Account</Link>

@@ -9,6 +9,7 @@ import Profile from './pages/profile'
 import FetchingPage from './components/fetchingPage'
 import ProtectedPage from './components/protectedPage'
 import Account from './pages/account'
+import Ranking from './pages/ranking'
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
     children: [
       {
         path:"/",
-        element: <FetchingPage url={`http://${import.meta.env.VITE_BACKENDURL}/games`}><MainPage></MainPage></FetchingPage>
+        element: <MainPage></MainPage>
       },
       {
         path: "login",
@@ -26,11 +27,15 @@ const router = createBrowserRouter([
       },
       {
         path: "user/:username",
-        element: <FetchingPage url={`http://${import.meta.env.VITE_BACKENDURL}/users/:username/profile`}><Profile></Profile></FetchingPage>
+        element: <Profile></Profile>
       },
       {
         path: "account",
         element: <ProtectedPage><Account></Account></ProtectedPage>
+      },
+      {
+        path: ":game/ranking",
+        element: <Ranking></Ranking>
       }
     ]
   }

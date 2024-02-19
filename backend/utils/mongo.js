@@ -108,8 +108,10 @@ exports.getGameRankings = async (gameId) => {
 }
 
 exports.getUserGameRanking = async (userId, gameId) => {
-    let elo = (await Ranking.find({gameId: {$eq: gameId}, userId: {$eq: userId}}).exec()).elo;
-    let position = (await Ranking.find({elo: {$gt: elo}})).length;
+    let elo = await Ranking.find({gameId: {$eq: gameId}, userId: {$eq: userId}}).exec();
+    if(elo.length == 0) return null;
+    elo = elo[0].elo
+    let position = (await Ranking.find({elo: {$gt: elo}})).length + 1;
     let ranking = {
         elo,
         position,

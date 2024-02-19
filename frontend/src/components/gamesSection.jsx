@@ -9,11 +9,11 @@ export default function GamesSection({category, title, data}){
                 ?
                 <div className="grid gap-5 items-center justify-center md:grid-cols-2 xl:grid-cols-3">
                     {
-                        data.filter(game => game.mode == category).map(game => <GameCard game={game}>{game.name}</GameCard>)
+                        data.filter(game => game.mode == category).map(game => <GameCard game={game} key={game._id}>{game.name}</GameCard>)
                     }
                 </div>
                 :
-                <p>There's no games in this category yet</p>
+                <p>There're no games in this category yet</p>
             }
         </section>
     )

@@ -10,7 +10,6 @@ export default function Volume({className}){
     useEffect(() => {
         let storedVolume = localStorage.getItem("volume");
         if(storedVolume){
-            console.log("test")
             setVolume(storedVolume);
         }     
         else{
