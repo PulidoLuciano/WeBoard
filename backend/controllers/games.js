@@ -15,7 +15,7 @@ exports.getAllGamesByMode = async (req, res) => {
 }
 
 exports.getGame = async (req, res) => {
-    let name = (req.params.game).toString().toLowerCase();
+    let name = (req.params.game);
     let game = await db.getGame(name);
     res.send(game);
 }

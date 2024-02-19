@@ -6,10 +6,10 @@ import Foundation from './foundation'
 import Login from './pages/login'
 import MainPage from './pages/main'
 import Profile from './pages/profile'
-import FetchingPage from './components/fetchingPage'
 import ProtectedPage from './components/protectedPage'
 import Account from './pages/account'
 import Ranking from './pages/ranking'
+import Instructions from './pages/instructions'
 
 const router = createBrowserRouter([
   {
@@ -36,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: ":game/ranking",
         element: <Ranking></Ranking>
+      },
+      {
+        path: ":game/instructions",
+        element: <Instructions></Instructions>
       }
     ]
   }
