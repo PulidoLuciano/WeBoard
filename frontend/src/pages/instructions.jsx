@@ -22,7 +22,7 @@ function Content({data}){
                         case "paragraph":
                             return <p key={index} className="pb-3">{element.content}</p>
                         case "image":
-                            return <img src={element.content} alt="" key={index} className="mx-auto py-3"/>
+                            return <img src={element.content} alt="" key={index} className="mx-auto py-3 max-w-2xl"/>
                     }
                 })
             }

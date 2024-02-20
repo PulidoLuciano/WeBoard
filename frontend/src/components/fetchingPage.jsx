@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import useFetch from "../logic/hooks/useFetch"
 import { useParams } from "react-router-dom";
 import replaceParams from "../logic/replaceParams";
+import LoadingPage from "../pages/loading";
 
 export default function FetchingPage({children, url}){
     
@@ -12,7 +13,7 @@ export default function FetchingPage({children, url}){
         <>
         {
             (loading) ?
-            <h1>Loading</h1>
+            <LoadingPage></LoadingPage>
             :
             (error) ?
             <h1>Error: {url}</h1>

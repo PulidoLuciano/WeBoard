@@ -10,6 +10,7 @@ import ProtectedPage from './components/protectedPage'
 import Account from './pages/account'
 import Ranking from './pages/ranking'
 import Instructions from './pages/instructions'
+import LoadingPage from './pages/loading'
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
       {
         path: ":game/instructions",
         element: <Instructions></Instructions>
-      }
+      },
     ]
   }
 ])
