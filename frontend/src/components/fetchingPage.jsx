@@ -3,6 +3,7 @@ import useFetch from "../logic/hooks/useFetch"
 import { useParams } from "react-router-dom";
 import replaceParams from "../logic/replaceParams";
 import LoadingPage from "../pages/loading";
+import Error from "../pages/error";
 
 export default function FetchingPage({children, url}){
     
@@ -16,7 +17,7 @@ export default function FetchingPage({children, url}){
             <LoadingPage></LoadingPage>
             :
             (error) ?
-            <h1>Error: {url}</h1>
+            <Error error={error}></Error>
             :
             React.cloneElement(children, {
                 data

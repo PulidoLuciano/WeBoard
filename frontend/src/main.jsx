@@ -11,12 +11,13 @@ import Account from './pages/account'
 import Ranking from './pages/ranking'
 import Instructions from './pages/instructions'
 import LoadingPage from './pages/loading'
+import Error from './pages/error'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Foundation/>,
-    errorElement: <div>Error</div>,
+    errorElement: <Error error={"Page not found"}></Error>,
     children: [
       {
         path:"/",
