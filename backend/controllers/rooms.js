@@ -7,7 +7,7 @@ exports.getAllRooms = async (req, res) => {
 
 exports.getRoom = async (req, res) => {
     let room = await db.getRoomById(req.params.roomId);
-    if(!room.users.filter(data => data.user == req.user.userId) && !req.user.idAdmin) throw new ValidationError("You doesn't have access to this room");
+    checkUser(req, room);
     res.send(room);
 }
 
@@ -24,10 +24,19 @@ exports.queuePetition = async (req, res) => {
     throw new AppError("That mode doesn't exists");
 }
 
+exports.makeAction = async (req, res) => {
+    let room = await db.getRoomById(req.params.roomId);
+    
+}
+
 const createSingleRoom = async (game, userId) => {
     return await db.createRoom(game, [userId]);
 }
 
 const putUserOnQueue = async (game, userId) => {
     
+}
+
+const checkUser = async (req, room) => {
+    if(!room.users.filter(data => data.user == req.user.userId) && !req.user.idAdmin) throw new ValidationError("You doesn't have access to this room");
 }

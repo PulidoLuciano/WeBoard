@@ -12,6 +12,7 @@ import Ranking from './pages/ranking'
 import Instructions from './pages/instructions'
 import LoadingPage from './pages/loading'
 import Error from './pages/error'
+import RoomPage from './pages/roomPage'
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
         path: ":game/instructions",
         element: <Instructions></Instructions>
       },
+      {
+        path: "room/:roomId",
+        element: <RoomPage></RoomPage>
+      }
     ]
   }
 ])
