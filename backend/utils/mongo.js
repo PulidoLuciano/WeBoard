@@ -134,7 +134,7 @@ exports.getRoomById = async (id) => {
 exports.createRoom = async (game, users, type = "public", password = null) => {
     const room = new Room({
         game: game._id,
-        users: users.map(user => {return {user: user, score: 0, hasLoosed: false}}),
+        users: users,
         type,
         password,
         initialTime: Date.now(),

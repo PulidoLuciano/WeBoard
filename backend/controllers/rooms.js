@@ -1,3 +1,4 @@
+const gameAction = require("../games/gameAction");
 const { ValidationError, AppError } = require("../utils/errors");
 const db = require("../utils/mongo");
 
@@ -26,7 +27,11 @@ exports.queuePetition = async (req, res) => {
 
 exports.makeAction = async (req, res) => {
     let room = await db.getRoomById(req.params.roomId);
-    
+    let gameResponse = gameAction(room.game, room.gameData ?? null, room.users,req.body.action);
+    room.gameData = gameResponse.gameData;
+    room.markModified("gameData");
+    await room.save();
+    res.send({result: gameResponse.result, status: {isFinished: gameResponse.gameData.isFinished, users: gameResponse.gameData.users}});
 }
 
 const createSingleRoom = async (game, userId) => {

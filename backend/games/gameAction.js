@@ -1,12 +1,13 @@
-import { AppError } from "../utils/errors";
-import minesweeper from "./Minesweeper/minesweeper";
+const { AppError } = require("../utils/errors");
+const minesweeper = require("./Minesweeper/minesweeper");
 
-export default function gameAction(game, gameData, action){
-    let gameResponse = null;
+function gameAction(gameId, gameData, users, action){
     
-    switch(game){
-        case "Minesweeper":
-            gameResponse = minesweeper(gameData, action);
+    let gameResponse = null;
+
+    switch(gameId.toString()){
+        case "65d24331cd060c516439d182": //Minesweeper
+            gameResponse = minesweeper(gameData, users, action);
             break;
         default:
             throw new AppError("That game does not exist");
@@ -14,3 +15,5 @@ export default function gameAction(game, gameData, action){
 
     return gameResponse;
 }
+
+module.exports = gameAction;

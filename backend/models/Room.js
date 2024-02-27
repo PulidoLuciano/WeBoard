@@ -2,20 +2,6 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
-const usersSchema = new Schema({
-    user: {
-        type: mongoose.Types.ObjectId,
-        ref: "User"
-    },
-    score: {
-        type: Number,
-    },
-    hasLoosed: {
-        type: Boolean,
-        default: false
-    }
-})
-
 const roomSchema = new Schema({
     type: {
         type: String,
@@ -29,7 +15,10 @@ const roomSchema = new Schema({
     initialTime:{
         type: Number,
     },
-    users: [usersSchema],
+    users: [{
+        type: mongoose.Types.ObjectId,
+        ref: "User"
+    }],
     game: {
         type: mongoose.Types.ObjectId,
         ref: "Game"
