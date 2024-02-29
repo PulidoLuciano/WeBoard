@@ -3,7 +3,7 @@ const { AppError } = require("../../utils/errors");
 module.exports = function minesweeper(gameData, users,action){
     let result = null;
     if(!gameData){
-        gameData = createNewGame(20, 24, 99, users,action);
+        gameData = createNewGame(14, 18, 40, users,action);
     }
     if(!gameData.isFinished) result = processAction(gameData, action);
     let sendData = {result: result ?? gameData, gameData};
@@ -64,7 +64,7 @@ function bombsAround(line, column, board){
 function isWon(gameData){
     let cellsRemain = [];
     gameData.board.forEach(line => {
-        cellsRemain.concat(line.filter((cell) => cell.isDigged))
+        cellsRemain = cellsRemain.concat(line.filter((cell) => !cell.isDigged))
     });
     return (cellsRemain.length == gameData.bombs);
 }
@@ -92,7 +92,7 @@ function flag(line, column, gameData){
     gameData.board[line][column].isFlagged = !gameData.board[line][column].isFlagged;
     if(gameData.board[line][column].isFlagged) gameData.flags--;
     else gameData.flags++;
-    return {flags: gameData.flags};
+    return {flags: gameData.flags, line, column, isFlagged: gameData.board[line][column].isFlagged};
 }
 
 function createNewGame(width, height, bombs, users,action){

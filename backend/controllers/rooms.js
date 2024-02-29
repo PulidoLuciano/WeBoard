@@ -17,10 +17,12 @@ exports.queuePetition = async (req, res) => {
     if(game.mode == "utility" || game.mode == "singleplayer"){
         let room = await createSingleRoom(game, req.user.userId);
         res.send(room);
+        return;
     }
     else if(game.mode == "onevone" || game.mode == "allvall"){
         putUserOnQueue(game, req.user.userId);
         res.send({message: "User put on queue"});
+        return;
     }
     throw new AppError("That mode doesn't exists");
 }
@@ -43,5 +45,5 @@ const putUserOnQueue = async (game, userId) => {
 }
 
 const checkUser = async (req, room) => {
-    if(!room.users.filter(data => data.user == req.user.userId) && !req.user.idAdmin) throw new ValidationError("You doesn't have access to this room");
+    if(!room.users.filter(data => data == req.user.userId) && !req.user.idAdmin) throw new ValidationError("You doesn't have access to this room");
 }

@@ -5,10 +5,10 @@ import replaceParams from "../logic/replaceParams";
 import LoadingPage from "../pages/loading";
 import Error from "../pages/error";
 
-export default function FetchingPage({children, url}){
+export default function FetchingPage({children, url, options = null}){
     
     const params = useParams();
-    const {data, error, loading} = useFetch(replaceParams(url, params));
+    const {data, error, loading} = useFetch(replaceParams(url, params), options);
 
     return (
         <>
@@ -17,7 +17,7 @@ export default function FetchingPage({children, url}){
             <LoadingPage></LoadingPage>
             :
             (error) ?
-            <Error error={error}></Error>
+            <Error error={data}></Error>
             :
             React.cloneElement(children, {
                 data

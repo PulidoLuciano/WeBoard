@@ -5,6 +5,10 @@ module.exports = {
     "./src/**/*.{html,js,jsx}"],
   theme: {
     extend: {
+      gridTemplateColumns:{
+        "14": "repeat(14, minmax(0, 1fr))",
+        "20": "repeat(20, minmax(0, 1fr))"
+      },
       animation:{
         'card-pass': 'cardPass 0.25s linear infinite'
       },
